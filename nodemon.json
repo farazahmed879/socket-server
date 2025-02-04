@@ -1,0 +1,5 @@
+{
+    "watch": ["src", "server"],  
+    "ignore": ["node_modules", "logs", "temp", "*.log"],  
+    "legacyWatch": true  
+  }
