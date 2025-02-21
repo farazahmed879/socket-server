@@ -2,6 +2,7 @@ const { Server } = require("socket.io");
 const fs = require("fs");
 const NodeCache = require("node-cache");
 const { join } = require("path");
+require("dotenv").config();
 
 const io = new Server({ cors: { origin: process.env.FRONTEND_URL } });
 
