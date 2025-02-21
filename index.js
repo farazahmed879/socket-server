@@ -87,15 +87,15 @@ io.on("connection", (socket) => {
 
   // Handle incoming chat request
   socket.on("addNewRequest", (request) => {
-    // console.log("addNewRequest", request);
+    console.log("addNewRequest", request);
 
     onlineUsers.forEach((e) => {
       if (e.role != "NORMAL") {
-        io.emit("getRequest", request);
-        io.emit("getNotification", {
+        io.to(e?.userId).emit("getRequest", request);
+        io.to(e?.userId).emit("getNotification", {
           senderId: request?.senderId?._id,
           isRead: false,
-          message: `${request?.senderId?.name} requested for a chat`,
+          message: `${request?.senderId?.email} requested for a chat`,
           date: new Date(),
         });
       }
@@ -105,14 +105,9 @@ io.on("connection", (socket) => {
   // Handle accepted request
   socket.on("requestAccepted", (chat) => {
     console.log("requestAccepted");
-    const user = onlineUserCache.get(chat.senderId);
-    if (user) {
-      // io.to(user.socketId).emit("getAcceptRequest", chat);
-      // io.to(user.socketId).emit("getAcceptRequest", chat);
-      io.emit("getAcceptRequest", chat);
-    } else {
-      console.log("User not found for senderId:", chat.senderId);
-    }
+    // const user = onlineUserCache.get(chat.senderId);
+
+    io.emit("getAcceptRequest", chat);
   });
 
   // Handle chat closure
