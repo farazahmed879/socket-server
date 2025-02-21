@@ -3,7 +3,7 @@ const fs = require("fs");
 const NodeCache = require("node-cache");
 const { join } = require("path");
 
-const io = new Server({ cors: { origin: "http://localhost:3000" } });
+const io = new Server({ cors: { origin: process.env.FRONTEND_URL } });
 
 // Cache for storing online users in-memory
 const onlineUserCache = new NodeCache({ stdTTL: 0, checkperiod: 0 });
@@ -145,6 +145,9 @@ io.on("connection", (socket) => {
 });
 
 // Start listening on port 4000
-io.listen(4000, () => {
-  console.log("Server listening on port 4000...");
+
+const PORT = process.env.PORT || 5000;
+
+io.listen(PORT, () => {
+  console.log(`Server listening on port ${PORT}...`);
 });
