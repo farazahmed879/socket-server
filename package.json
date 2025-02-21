@@ -4,7 +4,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "serve": "nodemon --legacy-watch index.js"
+    "serve": "nodemon --legacy-watch index.js",
+    "start": "node index.js"
   },
   "author": "",
   "license": "ISC",
